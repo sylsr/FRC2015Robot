@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+C:\Users\Josh\Documents\GitHub\Robot\.metadata\.plugins\org.eclipse.jdt.core
