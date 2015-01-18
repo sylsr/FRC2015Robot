@@ -41,12 +41,10 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
 
         if (autonomousCommand != null) autonomousCommand.start();
-        jag3.setPercentMode();
     }
 
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        jag3.set(5);
     }
 
     public void teleopInit() {
