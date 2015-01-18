@@ -29,7 +29,8 @@ public class DriveMaster
 		
 	}
 	//gets the modified z axis from the joystick that tests against deadzone
-	public double getZAxis() {
+	public double getZAxis()
+	{
 		return getDead(-joyRight.getZ());
 		
 	}
