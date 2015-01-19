@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
+        jag3.set(2);
     }
 
     public void teleopInit() 
