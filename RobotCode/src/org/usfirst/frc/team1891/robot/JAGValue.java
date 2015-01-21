@@ -9,15 +9,31 @@ public class JAGValue {
 	
 	public double setSpeed(int Index) {
 		double Speed = 0;
+		double x = roboDrive.getXAxis();
+		double y = roboDrive.getYAxis();
+		double z = roboDrive.getZAxis();
+		double damp = getPrecisionMode();
+		
+		double a = (y - z - x) * damp;
+		double b = (y + z + x) * damp;
+		double c = (y + z - x) * damp;
+		double d = (y - z + x) * damp;
+		
+		double overflow = getOverflow(a, b, c, d);
+		
+		
 		if (Index == 3) {
-			Speed = getPrecisionMode() * (roboDrive.getYAxis() - roboDrive.getZAxis() - roboDrive.getXAxis());
+			Speed = (y - z - x) * damp * overflow;
 		}if (Index == 4) {
-			Speed = getPrecisionMode() * -(roboDrive.getYAxis() + roboDrive.getZAxis() + roboDrive.getXAxis());
+			Speed = -(y + z + x) * damp * overflow;
 		}if (Index == 5) {
-			Speed = getPrecisionMode() *  -(roboDrive.getYAxis() + roboDrive.getZAxis() - roboDrive.getXAxis());
+			Speed = -(y + z - x) * damp * overflow;
 		}if (Index == 6) {
-			Speed = getPrecisionMode() *  (roboDrive.getYAxis() - roboDrive.getZAxis() + roboDrive.getXAxis());
+			Speed = (y - z + x) * damp * overflow;
 		}
+		
+		
+		
 		
 		/**
 		FrontLeft (jag 4) = Y + Z + X
@@ -50,5 +66,31 @@ public class JAGValue {
 		
 		
 		return damp;
+	}
+	
+	
+	//this class checks if any joystick inputs are greater than one, and if they
+	//are, it returns a fraction to keep the jags running at the same ratio
+	
+	public double getOverflow(double a, double b, double c, double d){
+		a = Math.abs(a);
+		b = Math.abs(b);
+		c = Math.abs(c);
+		d = Math.abs(d);
+		
+		double max = 0;
+		double reciprocal = 1;
+		if(a>=b && b>=c && c>= d) max = a;
+		else if (b>=c && c>=d) max = b;
+		else if (c>=d) max = c;
+		else max = d;
+		
+		if (max >= 1){
+			reciprocal = 1/max;
+		}
+		
+		
+		
+		return reciprocal;
 	}
 }
