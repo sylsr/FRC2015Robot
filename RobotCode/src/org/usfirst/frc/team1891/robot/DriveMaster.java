@@ -20,26 +20,50 @@ public class DriveMaster
 	//gets the modified y axis from the joystick that tests against deadzone
 	
 	public double getYAxis() {
-		return getDead(joyRight.getY());
+		return getDead(joyRight.getRawAxis(1));
 			
 	}
 	//gets the modified x axis from the joystick that tests against deadzone
 	public double getXAxis() {
-		return getDead(-joyRight.getX());
+		return getDead(-joyRight.getRawAxis(0));
 		
 	}
-	//gets the modified z axis from the joystick that tests against deadzone
-	public double getZAxis()
-	{
-		return getDead(-joyRight.getZ());
+	//gets the modified z axis from the joystick that tests against deadzone; for joystick RawAxis index is 2, for xbox index is 4
+	public double getZAxis() {
+		//checks which controller is being used and switches to the correct profile
 		
+		if (getProfile() == 1){
+			return getDead(-joyRight.getRawAxis(2));
+		}
+		return getDead(-joyRight.getRawAxis(4));
 	}
+	
 
 	public double getDead(double a) {
 		
 		if(Math.abs(a) > DEADZONE) {
 			return a;
 		}return 0;
+	}
+	public boolean getButton(int button){
+		return joyRight.getRawButton(button);
+	}
+	
+	public double getSlider() {
+		return joyRight.getRawAxis(3);
+	}
+	public int getProfile(){
+		int profile = 1;
+		int buttons = joyRight.getButtonCount();
+		
+		//checks how many buttons the controller has
+		
+		if (buttons == 10){
+			profile = 2;
+		}else if(buttons == 12){
+			profile = 1;
+		}
+		return profile;
 	}
 
 }
