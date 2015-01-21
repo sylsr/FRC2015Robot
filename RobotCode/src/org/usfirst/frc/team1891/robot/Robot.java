@@ -2,10 +2,14 @@
 package org.usfirst.frc.team1891.robot;
 
 import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.CounterBase;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -25,7 +29,8 @@ public class Robot extends IterativeRobot
     CANJaguar jag4;
     CANJaguar jag5;
     CANJaguar jag6;
-    JAGValue jagMaster = new JAGValue();
+    AutonomousMaster auto;
+    JAGValue jagMaster= new JAGValue();
 	//Initiates all instances of all classes
     public void robotInit()
     {
@@ -34,6 +39,8 @@ public class Robot extends IterativeRobot
 		jag4 = new CANJaguar(4);
 		jag5 = new CANJaguar(5);
 		jag6 = new CANJaguar(6);
+		auto= new AutonomousMaster(0.3, 0.2, 0.2);
+		auto.enable();
     }
 	
 	public void disabledPeriodic() 
@@ -49,8 +56,11 @@ public class Robot extends IterativeRobot
 
     public void autonomousPeriodic()
     {
+    	jag3.enableControl();
+    	jag3.set(auto.getSetpoint());
         Scheduler.getInstance().run();
-        jag3.set(2);
+        
+        
     }
 
     public void teleopInit() 
