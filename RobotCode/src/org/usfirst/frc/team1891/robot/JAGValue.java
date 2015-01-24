@@ -23,13 +23,13 @@ public class JAGValue {
 		
 		
 		if (Index == 3) {
-			Speed = (y - z - x) * damp * overflow;
+			Speed = a * overflow;
 		}if (Index == 4) {
-			Speed = -(y + z + x) * damp * overflow;
+			Speed = -b * overflow;
 		}if (Index == 5) {
-			Speed = -(y + z - x) * damp * overflow;
+			Speed = -c * overflow;
 		}if (Index == 6) {
-			Speed = (y - z + x) * damp * overflow;
+			Speed = d * overflow;
 		}
 		
 		
@@ -60,12 +60,12 @@ public class JAGValue {
 		
 		
 		//for single button damp
-		/**
-		
-		if(roboDrive.getButton(3) == true){
-			damp = .3;
-		}**/
-		
+
+		if(roboDrive.getProfile() == 3){
+			if(roboDrive.getButton(3) == true){
+				damp = .3;
+			}
+		}
 		
 		return damp;
 	}
@@ -80,12 +80,8 @@ public class JAGValue {
 		c = Math.abs(c);
 		d = Math.abs(d);
 		
-		double max = 0;
+		double max = Math.max(Math.max(Math.abs(a),Math.abs(b)), Math.max(Math.abs(c), Math.abs(d)));
 		double reciprocal = 1;
-		if(a>=b && b>=c && c>= d) max = a;
-		else if (b>=c && c>=d) max = b;
-		else if (c>=d) max = c;
-		else max = d;
 		
 		if (max >= 1){
 			reciprocal = 1/max;
