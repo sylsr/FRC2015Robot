@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.CANJaguar;
 
 //The class that handles input from the Joystick and returns JAG set values
 public class JAGValue {
-	DriveMaster roboDrive = new DriveMaster(1);
+	DriveMaster roboDrive = new DriveMaster(0);
 	
 	
 	public double setSpeed(int Index) {
