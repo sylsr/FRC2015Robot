@@ -50,14 +50,12 @@ public class JAGValue {
 		double damp = 1;
 		
 		//for slider on joystick damp
-		if(roboDrive.getProfile() == 1){
-			damp = (-roboDrive.getSlider() + 1) * .35 + .3;
-		}
-		//for xbox360 r trigger damp
-		else{
-			damp = 1-roboDrive.getSlider() * .7;
-		}
 		
+		//damp = (-roboDrive.getSlider() + 1) * .35 + .3;
+		
+		//for xbox360 r trigger damp
+		
+		damp = 1-roboDrive.getSlider() * .7;
 		
 		//for single button damp
 		/**

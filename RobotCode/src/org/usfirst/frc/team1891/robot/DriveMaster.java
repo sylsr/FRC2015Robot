@@ -20,12 +20,6 @@ public class DriveMaster
 	public double getDEADZONE() {
 		return DEADZONE;
 	}
-	//gets the profile
-	public int getProfile(){
-		int profileIndex = 1;
-		if (joyRight.getButtonCount() == 10) profileIndex = 2;
-		return profileIndex;
-	}
 	//gets the modified y axis from the joystick that tests against deadzone
 	
 	public double getYAxis() {
@@ -39,9 +33,6 @@ public class DriveMaster
 	}
 	//gets the modified z axis from the joystick that tests against deadzone; for joystick RawAxis index is 2, for xbox index is 4
 	public double getZAxis() {
-		if (getProfile() == 1){
-			return getDead(-joyRight.getRawAxis(2));
-		}
 		return getDead(-joyRight.getRawAxis(4));
 		
 	}
