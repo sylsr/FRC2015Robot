@@ -24,24 +24,23 @@ public class DriveMaster
 	public int getProfile(){
 		int profileIndex = 1;
 		if (joyRight.getButtonCount() == 10) profileIndex = 2;
-		if (joyRight.getButtonCount() == 11) profileIndex = 3;
 		return profileIndex;
 	}
 	//gets the modified y axis from the joystick that tests against deadzone
 	
 	public double getYAxis() {
-		return getDead(joyRight.getY());
+		return getDead(joyRight.getRawAxis(1));
 			
 	}
 	//gets the modified x axis from the joystick that tests against deadzone
 	public double getXAxis() {
-		return getDead(-joyRight.getX());
+		return getDead(-joyRight.getRawAxis(0));
 		
 	}
 	//gets the modified z axis from the joystick that tests against deadzone; for joystick RawAxis index is 2, for xbox index is 4
 	public double getZAxis() {
-		if (getProfile() == 1||getProfile()==3){
-			return getDead(-joyRight.getZ());
+		if (getProfile() == 1){
+			return getDead(-joyRight.getRawAxis(2));
 		}
 		return getDead(-joyRight.getRawAxis(4));
 		
