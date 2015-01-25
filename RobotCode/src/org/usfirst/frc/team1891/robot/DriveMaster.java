@@ -23,17 +23,17 @@ public class DriveMaster
 	//gets the modified y axis from the joystick that tests against deadzone
 	
 	public double getYAxis() {
-		return getDead(joyRight.getRawAxis(1));
+		return getDead(joyRight.getY());
 			
 	}
 	//gets the modified x axis from the joystick that tests against deadzone
 	public double getXAxis() {
-		return getDead(-joyRight.getRawAxis(0));
+		return getDead(-joyRight.getX());
 		
 	}
 	//gets the modified z axis from the joystick that tests against deadzone; for joystick RawAxis index is 2, for xbox index is 4
 	public double getZAxis() {
-		return getDead(-joyRight.getRawAxis(4));
+		return getDead(-joyRight.getZ());
 		
 	}
 	
