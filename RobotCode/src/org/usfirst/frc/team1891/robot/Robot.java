@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SampleRobot;
+
 import org.omg.CORBA.portable.UnknownException;
 import org.usfirst.frc.team1891.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1891.robot.subsystems.ExampleSubsystem;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot
     AccelMaster IMU;
     DigitalSensorMaster digitalSwitch;
     ServoMaster servo1;
+    Potentiometer pot1;
     public void robotInit()
     {
     	oi = new OI();
@@ -48,6 +50,7 @@ public class Robot extends IterativeRobot
 		IMU = new AccelMaster();
 		digitalSwitch=new DigitalSensorMaster();
 		servo1 = new ServoMaster();
+		pot1 = new Potentiometer();
     }
 	
 	public void disabledPeriodic() 
@@ -85,7 +88,7 @@ public class Robot extends IterativeRobot
 
     }
 
-    public void teleopPeriodic() 
+	public void teleopPeriodic() 
     {	
 		Scheduler.getInstance().run();
 		jag3.set(jagMaster.setSpeed(3));
@@ -95,6 +98,7 @@ public class Robot extends IterativeRobot
 		IMU.startDash();
 		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput());  
 		servo1.start();
+		SmartDashboard.putNumber("Potentiometer", pot1.returnAngle());
     }
 
 
