@@ -37,6 +37,7 @@ public class Robot extends IterativeRobot
     JAGValue jagMaster= new JAGValue();
     AccelMaster IMU;
     DigitalSensorMaster digitalSwitch;
+    ServoMaster servo1;
     public void robotInit()
     {
     	oi = new OI();
@@ -46,6 +47,7 @@ public class Robot extends IterativeRobot
 		jag6 = new CANJaguar(6);
 		IMU = new AccelMaster();
 		digitalSwitch=new DigitalSensorMaster();
+		servo1 = new ServoMaster();
     }
 	
 	public void disabledPeriodic() 
@@ -64,6 +66,8 @@ public class Robot extends IterativeRobot
     {
     	
         Scheduler.getInstance().run();
+        IMU.startDash();
+		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput()); 
         
     }
 
@@ -89,7 +93,8 @@ public class Robot extends IterativeRobot
 		jag5.set(jagMaster.setSpeed(5));
 		jag6.set(jagMaster.setSpeed(6));
 		IMU.startDash();
-		digitalSwitch.startSensorDash();
+		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput());  
+		servo1.start();
     }
 
 

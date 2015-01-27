@@ -11,7 +11,6 @@ public class DigitalSensorMaster
 	{
 		dig = new DigitalInput(0);
 		LiveWindow.addSensor("DigitalInput", "Switch", dig);
-		LiveWindow.addSensor(null, 0, dig);
 
 	}
 	public boolean testDigitalInput()
@@ -24,9 +23,5 @@ public class DigitalSensorMaster
 		{
 			return false;
 		}
-	}
-	public void startSensorDash()
-	{
-		 SmartDashboard.putBoolean(  "IMU_Connected", testDigitalInput());
 	}
 }
