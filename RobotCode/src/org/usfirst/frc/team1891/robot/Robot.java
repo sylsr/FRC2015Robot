@@ -16,13 +16,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SampleRobot;
-
-
-
-
-
 import org.omg.CORBA.portable.UnknownException;
 import org.usfirst.frc.team1891.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1891.robot.subsystems.ExampleSubsystem;
@@ -34,19 +28,14 @@ public class Robot extends IterativeRobot
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	AnalogAccelerometer accel;
-
-    IMUAdvanced imu;
 	Command autonomousCommand;
 	//Instantiates jags with appropriate ID's
     CANJaguar jag3;
     CANJaguar jag4;
     CANJaguar jag5;
     CANJaguar jag6;
-    AutonomousMaster auto;
-    SerialPort serial_port;
     JAGValue jagMaster= new JAGValue();
-	//Initiates all instances of all classes
+    AccelMaster IMU;
     public void robotInit()
     {
     	oi = new OI();
@@ -54,8 +43,7 @@ public class Robot extends IterativeRobot
 		jag4 = new CANJaguar(4);
 		jag5 = new CANJaguar(5);
 		jag6 = new CANJaguar(6);
-		accel= new AnalogAccelerometer(4);
-		imu = new IMUAdvanced(serial_port,(byte) 10);
+		IMU = new AccelMaster();
     }
 	
 	public void disabledPeriodic() 
@@ -74,25 +62,6 @@ public class Robot extends IterativeRobot
     {
     	
         Scheduler.getInstance().run();
-        SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
-        SmartDashboard.putBoolean(  "IMU_IsCalibrating",    imu.isCalibrating());
-        SmartDashboard.putNumber(   "IMU_Yaw",              imu.getYaw());
-        SmartDashboard.putNumber(   "IMU_Pitch",            imu.getPitch());
-        SmartDashboard.putNumber(   "IMU_Roll",             imu.getRoll());
-        SmartDashboard.putNumber(   "IMU_CompassHeading",   imu.getCompassHeading());
-        SmartDashboard.putNumber(   "IMU_Update_Count",     imu.getUpdateCount());
-        SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());
-
-        // If you are using the IMUAdvanced class, you can also access the following
-        // additional functions, at the expense of some extra processing
-        // that occurs on the CRio processor
-        
-        SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
-        SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
-        SmartDashboard.putBoolean(  "IMU_IsMoving",         imu.isMoving());
-        SmartDashboard.putNumber(   "IMU_Temp_C",           imu.getTempC());
-        
-        Timer.delay(0.2);
         
     }
 
@@ -117,25 +86,7 @@ public class Robot extends IterativeRobot
 		jag4.set(jagMaster.setSpeed(4));
 		jag5.set(jagMaster.setSpeed(5));
 		jag6.set(jagMaster.setSpeed(6));
-		 SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
-	        SmartDashboard.putBoolean(  "IMU_IsCalibrating",    imu.isCalibrating());
-	        SmartDashboard.putNumber(   "IMU_Yaw",              imu.getYaw());
-	        SmartDashboard.putNumber(   "IMU_Pitch",            imu.getPitch());
-	        SmartDashboard.putNumber(   "IMU_Roll",             imu.getRoll());
-	        SmartDashboard.putNumber(   "IMU_CompassHeading",   imu.getCompassHeading());
-	        SmartDashboard.putNumber(   "IMU_Update_Count",     imu.getUpdateCount());
-	        SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());
-
-	        // If you are using the IMUAdvanced class, you can also access the following
-	        // additional functions, at the expense of some extra processing
-	        // that occurs on the CRio processor
-	        
-	        SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
-	        SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
-	        SmartDashboard.putBoolean(  "IMU_IsMoving",         imu.isMoving());
-	        SmartDashboard.putNumber(   "IMU_Temp_C",           imu.getTempC());
-	        
-	        Timer.delay(0.2);
+		IMU.startDash();
 	        
     }
 
