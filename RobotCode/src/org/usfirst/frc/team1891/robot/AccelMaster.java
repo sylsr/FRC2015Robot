@@ -35,11 +35,11 @@ public class AccelMaster
 		{
 	    		
 	    }
-	        if ( imu != null )
-	        {
-	            LiveWindow.addSensor("IMU", "Gyro", imu);
-	        }
-	        first_iteration = true;
+	    if ( imu != null )
+	    {
+	       LiveWindow.addSensor("IMU", "Gyro", imu);
+	    }
+	    first_iteration = true;
 	}
 	public void startDash()
 	{

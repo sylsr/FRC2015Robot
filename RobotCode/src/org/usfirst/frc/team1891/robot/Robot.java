@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot
     CANJaguar jag6;
     JAGValue jagMaster= new JAGValue();
     AccelMaster IMU;
+    DigitalSensorMaster digitalSwitch;
     public void robotInit()
     {
     	oi = new OI();
@@ -44,6 +45,7 @@ public class Robot extends IterativeRobot
 		jag5 = new CANJaguar(5);
 		jag6 = new CANJaguar(6);
 		IMU = new AccelMaster();
+		digitalSwitch=new DigitalSensorMaster();
     }
 	
 	public void disabledPeriodic() 
@@ -87,7 +89,7 @@ public class Robot extends IterativeRobot
 		jag5.set(jagMaster.setSpeed(5));
 		jag6.set(jagMaster.setSpeed(6));
 		IMU.startDash();
-	        
+		digitalSwitch.startSensorDash();
     }
 
 
