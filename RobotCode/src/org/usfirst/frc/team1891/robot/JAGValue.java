@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.CANJaguar;
 
 //The class that handles input from the Joystick and returns JAG set values
 public class JAGValue {
-	DriveMaster roboDrive = new DriveMaster(0);
+	DriveMaster roboDrive = new DriveMaster(1);
 	
 	
 	public double setSpeed(int Index) {
@@ -23,13 +23,13 @@ public class JAGValue {
 		
 		
 		if (Index == 3) {
-			Speed = (y - z - x) * damp * overflow;
+			Speed = a * overflow;
 		}if (Index == 4) {
-			Speed = -(y + z + x) * damp * overflow;
+			Speed = -b * overflow;
 		}if (Index == 5) {
-			Speed = -(y + z - x) * damp * overflow;
+			Speed = -c * overflow;
 		}if (Index == 6) {
-			Speed = (y - z + x) * damp * overflow;
+			Speed = d * overflow;
 		}
 		
 		
@@ -50,26 +50,28 @@ public class JAGValue {
 		double damp = 1;
 		
 		//for slider on joystick damp
-		
-		//damp = (-roboDrive.getSlider() + 1) * .35 + .3;
-		
+		if(roboDrive.getProfile() == 1){
+			damp = (-roboDrive.getSlider() + 1) * .35 + .3;
+		}
 		//for xbox360 r trigger damp
+		else{
+			damp = 1-roboDrive.getSlider() * .7;
+		}
 		
-		damp = 1-roboDrive.getSlider() * .7;
 		
 		//for single button damp
-		/**
-		
-		if(roboDrive.getButton(3) == true){
-			damp = .3;
-		}**/
-		
+
+		if(roboDrive.getProfile() == 3){
+			if(roboDrive.getButton(3) == true){
+				damp = .3;
+			}
+		}
 		
 		return damp;
 	}
 	
 	
-	//this class checks if any joystick inputs are greater than one, and if they
+	//this method checks if any joystick inputs are greater than one, and if they
 	//are, it returns a fraction to keep the jags running at the same ratio
 	
 	public double getOverflow(double a, double b, double c, double d){
@@ -78,12 +80,8 @@ public class JAGValue {
 		c = Math.abs(c);
 		d = Math.abs(d);
 		
-		double max = 0;
+		double max = Math.max(Math.max(Math.abs(a),Math.abs(b)), Math.max(Math.abs(c), Math.abs(d)));
 		double reciprocal = 1;
-		if(a>=b && b>=c && c>= d) max = a;
-		else if (b>=c && c>=d) max = b;
-		else if (c>=d) max = c;
-		else max = d;
 		
 		if (max >= 1){
 			reciprocal = 1/max;
