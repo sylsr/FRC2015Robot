@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class Potentiometer
 {
-	//Brings in porentometer and named it pot
+	//Brings in potentometer and named it pot
 	AnalogPotentiometer pot; 
 	//Instantiates current as a double
 	double current;
