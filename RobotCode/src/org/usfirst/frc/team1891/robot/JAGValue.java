@@ -3,11 +3,14 @@ package org.usfirst.frc.team1891.robot;
 import edu.wpi.first.wpilibj.CANJaguar;
 
 //The class that handles input from the Joystick and returns JAG set values
-public class JAGValue {
+public class JAGValue
+{
 	DriveMaster roboDrive = new DriveMaster(1);
 	
-	
-	public double setSpeed(int Index) {
+	//setSpeed retrieves the axis from the joystick, modifies it, sets the deadzone
+	//dampens it and then returns the modified value.
+	public double setSpeed(int Index)
+	{
 		double Speed = 0;
 		double x = roboDrive.getXAxis();
 		double y = roboDrive.getYAxis();
@@ -22,13 +25,20 @@ public class JAGValue {
 		double overflow = getOverflow(a, b, c, d);
 		
 		
-		if (Index == 3) {
+		if (Index == 3)
+		{
 			Speed = a * overflow;
-		}if (Index == 4) {
+		}
+		if (Index == 4)
+		{
 			Speed = -b * overflow;
-		}if (Index == 5) {
+		}
+		if (Index == 5)
+		{
 			Speed = -c * overflow;
-		}if (Index == 6) {
+		}
+		if (Index == 6)
+		{
 			Speed = d * overflow;
 		}
 		
@@ -46,7 +56,8 @@ public class JAGValue {
 		return Speed;
 	}
 	
-	public double getPrecisionMode(){
+	public double getPrecisionMode()
+	{
 		double damp = 1;
 		
 		//for slider on joystick damp
@@ -74,7 +85,8 @@ public class JAGValue {
 	//this method checks if any joystick inputs are greater than one, and if they
 	//are, it returns a fraction to keep the jags running at the same ratio
 	
-	public double getOverflow(double a, double b, double c, double d){
+	public double getOverflow(double a, double b, double c, double d)
+	{
 		a = Math.abs(a);
 		b = Math.abs(b);
 		c = Math.abs(c);
@@ -83,7 +95,8 @@ public class JAGValue {
 		double max = Math.max(Math.max(Math.abs(a),Math.abs(b)), Math.max(Math.abs(c), Math.abs(d)));
 		double reciprocal = 1;
 		
-		if (max >= 1){
+		if (max >= 1)
+		{
 			reciprocal = 1/max;
 		}
 		

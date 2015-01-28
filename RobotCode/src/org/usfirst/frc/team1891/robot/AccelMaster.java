@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1891.robot;
-
+//******************************************
+//This class controls the navX-MX 
+//It is instantiated on the MXP port
+//Calls from the IMUAdvanced and IMUProtocol
+//******************************************
 import src.com.kauailabs.nav6.frc.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.SerialPort;
@@ -9,10 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class AccelMaster 
 {
+	
 	SerialPort serial_port;
-	//IMU imu;  // Alternatively, use IMUAdvanced for advanced features
 	IMUAdvanced imu;
 	boolean first_iteration;
+	//AccelMaster has in its constructor the IMUAdvanced
 	public AccelMaster()
 	{
 		try
@@ -41,6 +46,10 @@ public class AccelMaster
 	    }
 	    first_iteration = true;
 	}
+	/*
+	 * This method sends gyro and accelerometer from
+	 * the navX-MX board to the smartdashboard
+	 */
 	public void startDash()
 	{
 		 SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
@@ -50,12 +59,7 @@ public class AccelMaster
 	     SmartDashboard.putNumber(   "IMU_Roll",             imu.getRoll());
 	     SmartDashboard.putNumber(   "IMU_CompassHeading",   imu.getCompassHeading());
 	     SmartDashboard.putNumber(   "IMU_Update_Count",     imu.getUpdateCount());
-	     SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());
-
-	        // If you are using the IMUAdvanced class, you can also access the following
-	        // additional functions, at the expense of some extra processing
-	        // that occurs on the CRio processor
-	        
+	     SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());  
 	     SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
 	     SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
 	     SmartDashboard.putBoolean(  "IMU_IsMoving",         imu.isMoving());
