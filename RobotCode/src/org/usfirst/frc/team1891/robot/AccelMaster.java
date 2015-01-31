@@ -67,10 +67,5 @@ public class AccelMaster
 	        
 	        Timer.delay(0.2);
 	}
-	public void setXAccel()
-	{
-		
-	}
-	
 
 }

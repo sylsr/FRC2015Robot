@@ -40,7 +40,6 @@ public class Robot extends IterativeRobot
     DigitalSensorMaster digitalSwitch;
     ServoMaster servo1;
     Potentiometer pot1;
-    InfraredMaster infrared;
     public void robotInit()
     {
     	oi = new OI();
@@ -52,7 +51,6 @@ public class Robot extends IterativeRobot
 		digitalSwitch=new DigitalSensorMaster();
 		servo1 = new ServoMaster();
 		pot1 = new Potentiometer();
-		infrared= new InfraredMaster();
     }
 	
 	public void disabledPeriodic() 
@@ -72,12 +70,7 @@ public class Robot extends IterativeRobot
     	
         Scheduler.getInstance().run();
         IMU.startDash();
-		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput());
-	    SmartDashboard.putNumber(   "Infrared Front",   infrared.getDistanceFront());
-	    SmartDashboard.putNumber(   "Infrared Left",   infrared.getDistanceLeft());
-	    SmartDashboard.putNumber(   "Infrared Right",   infrared.getDistanceRight());
-	    SmartDashboard.putNumber(   "Infrared Back",   infrared.getDistanceBack());
-	    
+		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput()); 
         
     }
 
@@ -106,7 +99,6 @@ public class Robot extends IterativeRobot
 		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput());  
 		servo1.start();
 		SmartDashboard.putNumber("Potentiometer", pot1.returnAngle());
-
     }
 
 
