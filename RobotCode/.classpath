@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Zach.ZACH-LAPTOP.001/wpilib/java/current/lib/navx-mxp.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Zach.ZACH-LAPTOP.001/wpilib/java/current/lib/NetworkTables.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Zach.ZACH-LAPTOP.001/wpilib/java/current/lib/WPILib.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tyler/wpilib/java/current/lib/NetworkTables.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tyler/wpilib/java/current/lib/WPILib.jar"/>
+	<classpathentry kind="lib" path="C:/eclipseBULLBOTS/navx-mxp.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
