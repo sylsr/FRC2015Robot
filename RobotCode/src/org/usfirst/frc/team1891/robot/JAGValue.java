@@ -65,7 +65,7 @@ public class JAGValue
 			damp = (-roboDrive.getSlider() + 1) * .35 + .3;
 		}
 		//for xbox360 r trigger damp
-		else{
+		else if (roboDrive.getProfile() == 2){
 			damp = 1-roboDrive.getSlider() * .7;
 		}
 		
@@ -92,7 +92,7 @@ public class JAGValue
 		c = Math.abs(c);
 		d = Math.abs(d);
 		
-		double max = Math.max(Math.max(Math.abs(a),Math.abs(b)), Math.max(Math.abs(c), Math.abs(d)));
+		double max = Math.max(Math.max(a,b), Math.max(c, d));
 		double reciprocal = 1;
 		
 		if (max >= 1)

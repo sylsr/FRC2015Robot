@@ -25,9 +25,15 @@ public class DriveMaster
 	//gets the profile
 	public int getProfile()
 	{
+		//for logitech joysticks
 		int profileIndex = 1;
+		
+		//for xbox controller
 		if (joyRight.getButtonCount() == 10) profileIndex = 2;
+		
+		//for logitech controller
 		if (joyRight.getButtonCount() == 11) profileIndex = 3;
+		
 		return profileIndex;
 	}
 	//gets the modified y axis from the joystick that tests against deadzone
