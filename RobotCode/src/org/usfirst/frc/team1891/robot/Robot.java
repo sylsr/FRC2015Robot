@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot
     DigitalSensorMaster digitalSwitch;
     ServoMaster servo1;
     Potentiometer pot1;
-    InfraredMaster infrared;
+    InfraredSlave autoMove;
     public void robotInit()
     {
     	oi = new OI();
@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot
 		digitalSwitch=new DigitalSensorMaster();
 		servo1 = new ServoMaster();
 		pot1 = new Potentiometer();
-		infrared=new InfraredMaster();
+		autoMove= new InfraredSlave();
     }
 	
 	public void disabledPeriodic() 
@@ -73,10 +73,56 @@ public class Robot extends IterativeRobot
         Scheduler.getInstance().run();
         IMU.startDash();
 		SmartDashboard.putBoolean("Testing",digitalSwitch.testDigitalInput()); 
-		SmartDashboard.putNumber(   "Infrared Front",   infrared.getDistanceFront());
-		SmartDashboard.putNumber(   "Infrared Left",   infrared.getDistanceLeft());
-		SmartDashboard.putNumber(   "Infrared Right",   infrared.getDistanceRight());
-		SmartDashboard.putNumber(   "Infrared Back",   infrared.getDistanceBack());
+		autoMove.infraredDash();
+		if(autoMove.SensorForward()==true)
+		{
+			jag3.set(0.1);
+			jag4.set(-0.1);
+			jag5.set(-0.1);
+			jag6.set(0.1);
+			
+		}
+		if(autoMove.SensorLeft()==true)
+		{
+			jag3.set(-0.1);
+			jag4.set(-0.1);
+			jag5.set(0.1);
+			jag6.set(0.1);
+			
+		}
+		if(autoMove.SensorRight()==true)
+		{
+			jag3.set(0.1);
+			jag4.set(0.1);
+			jag5.set(-0.1);
+			jag6.set(-0.1);
+			
+		}
+		if(autoMove.SensorBack()==true)
+		{
+			jag3.set(-0.1);
+			jag4.set(0.1);
+			jag5.set(0.1);
+			jag6.set(-0.1);
+			
+		}
+		else if(autoMove.SensorForward()==false)
+		{
+			if(autoMove.SensorLeft()==false)
+			{
+				if(autoMove.SensorRight()==false)
+				{
+					if(autoMove.SensorBack()==false)
+					{
+						jag3.set(0);
+						jag4.set(0);
+						jag5.set(0);
+						jag6.set(0);
+					}
+				}
+			}
+			
+		}
         
     }
 
