@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.CANJaguar;
 //The class that handles input from the Joystick and returns JAG set values
 public class JAGValue
 {
-	DriveMaster roboDrive = new DriveMaster(1);
+	DriveMaster roboDrive = new DriveMaster(0);
 	
 	//setSpeed retrieves the axis from the joystick, modifies it, sets the deadzone
 	//dampens it and then returns the modified value.
@@ -61,7 +61,7 @@ public class JAGValue
 		double damp = 1;
 		
 		//for slider on joystick damp
-		if(roboDrive.getProfile() == 1){
+		if(roboDrive.getProfile() == 3||roboDrive.getProfile()==1){
 			damp = (-roboDrive.getSlider() + 1) * .35 + .3;
 		}
 		//for xbox360 r trigger damp
@@ -72,11 +72,10 @@ public class JAGValue
 		
 		//for single button damp
 
-		if(roboDrive.getProfile() == 3){
-			if(roboDrive.getButton(3) == true){
-				damp = .3;
-			}
+		if(roboDrive.getButton(6) == true){
+			damp = .3;
 		}
+	
 		
 		return damp;
 	}

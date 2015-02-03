@@ -25,14 +25,15 @@ public class DriveMaster
 	//gets the profile
 	public int getProfile()
 	{
-		//for logitech joysticks
+		//for main logitech joystick and logitech controller
 		int profileIndex = 1;
 		
 		//for xbox controller
 		if (joyRight.getButtonCount() == 10) profileIndex = 2;
 		
-		//for logitech controller
+		//for logitech attack 3 joystick
 		if (joyRight.getButtonCount() == 11) profileIndex = 3;
+		
 		
 		return profileIndex;
 	}
@@ -52,11 +53,20 @@ public class DriveMaster
 	//gets the modified z axis from the joystick that tests against deadzone; for joystick RawAxis index is 2, for xbox index is 4
 	public double getZAxis()
 	{
-		if (getProfile() == 1||getProfile()==3)
+		double z = 0;
+		if (getProfile() == 1)
 		{
-			return getDead(-joyRight.getZ());
+			z = getDead(-joyRight.getZ());
 		}
-		return getDead(-joyRight.getRawAxis(4));
+		if (getProfile() == 2)
+		{
+			z = getDead(-joyRight.getRawAxis(4));
+		}
+		if (getProfile()==3)
+		{
+			z = buttonDrive();
+		}
+		return z;
 		
 	}
 	
@@ -77,6 +87,23 @@ public class DriveMaster
 	
 	public double getSlider()
 	{
-		return joyRight.getRawAxis(3);
+		double slider = 0;
+		if(getProfile() == 3){
+			slider = joyRight.getZ();
+		}else{
+			slider = joyRight.getRawAxis(3);
+		}
+		return slider;
+	}
+	public double buttonDrive()
+	{
+		double button = 0;
+		if(getButton(4)==true){
+			button = 1;
+		}
+		if(getButton(5)==true){
+			button = -1;
+		}
+		return button;
 	}
 }
